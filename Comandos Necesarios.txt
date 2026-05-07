@@ -1,0 +1,36 @@
+----------------------------Comandos necesarios para el proyecto-----------------------------
+-----Comando para instalar dependencias 
+composer install
+
+-----Comando ppara generar AppKey 
+php artisan key:generate
+
+-----Comando para hacer migraciones
+php artisan migrate
+
+-----Comando para ejecutar el seed
+php artisan db:seed
+
+-----Comando para levantar un server
+php artisan serve
+
+----------------------------Extras que podriamos necesitar---------------------------------------------------
+
+---- Comando para crear una ruta directa a la imagenes del storage ----
+php artisan storage:link
+
+-- Comando para el envio de correos --
+composer require innoge/laravel-msgraph-mail
+---- Comando para instalar livewere ----
+composer require livewire/livewire
+
+---- libreria para genera PDF ----
+composer require barryvdh/laravel-dompdf
+
+Videos
+https://www.youtube.com/watch?v=Dp47xjPS_ik
+https://www.youtube.com/watch?v=afow0RsMvxI&t=1145s
+
+Integración APIS
+composer require guzzlehttp/guzzle
+
