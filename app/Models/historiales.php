@@ -16,8 +16,6 @@ class Historiales extends Model
         'fecha' => 'date',
     ];
 
-    public $timestamps = false;
-
     public function paciente()
     {
         return $this->belongsTo(Pacientes::class, 'paciente_id');

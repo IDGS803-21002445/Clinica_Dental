@@ -7,10 +7,39 @@
 @stop
 
 @section('content')
-    {{-- @include('Layouts.primerCambioContrasena') --}}
-    {{-- @include('Layouts.cierreSesionInactividad') --}}
-    {{-- @include('Layouts.Cards'); --}}
-    @include('Layouts.loader')
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h4 class="mb-0">Bienvenido</h4>
+                <small class="text-muted">Rol: {{ $rol ?? '—' }}</small>
+            </div>
+        </div>
+
+        @if (session('success'))
+            <x-adminlte-alert theme="success" title="OK" dismissable>
+                {{ session('success') }}
+            </x-adminlte-alert>
+        @endif
+
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <x-adminlte-small-box title="{{ $metrics['total_pacientes'] ?? 0 }}" text="Pacientes"
+                    icon="fas fa-user-injured" theme="info" url="{{ route('pacientes.index') }}" />
+            </div>
+            <div class="col-md-3 col-6">
+                <x-adminlte-small-box title="{{ $metrics['total_citas'] ?? 0 }}" text="Citas"
+                    icon="fas fa-calendar-alt" theme="primary" url="{{ route('citas.index') }}" />
+            </div>
+            <div class="col-md-3 col-6">
+                <x-adminlte-small-box title="{{ $metrics['citas_pendientes'] ?? 0 }}" text="Citas pendientes"
+                    icon="fas fa-clock" theme="warning" url="{{ route('citas.index') }}" />
+            </div>
+            <div class="col-md-3 col-6">
+                <x-adminlte-small-box title="{{ $metrics['dentistas_activos'] ?? 0 }}" text="Dentistas"
+                    icon="fas fa-user-md" theme="success" url="{{ route('dentistas.index') }}" />
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('footer')

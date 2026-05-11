@@ -12,11 +12,9 @@ class Dentistas extends Model
         'especialidad', 'usuario_id'
     ];
 
-    public $timestamps = false;
-
     public function usuario()
     {
-        return $this->belongsTo(Usuarios::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
     public function citas()
