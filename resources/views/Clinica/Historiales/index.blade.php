@@ -52,11 +52,16 @@
                             <td>{{ \Illuminate\Support\Str::limit($h->tratamiento, 60) }}</td>
                             <td class="text-right">
                                 <a class="btn btn-sm btn-primary" href="{{ route('historiales.edit', $h) }}">Editar</a>
+
                                 <form class="d-inline" method="POST" action="{{ route('historiales.destroy', $h) }}"
-                                    onsubmit="return confirm('¿Eliminar historial?');">
+                                    onsubmit="return confirm('¿Eliminar historial clínico?');">
+                                    
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+
+                                    <button class="btn btn-sm btn-danger" type="submit">
+                                        Eliminar
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -74,4 +79,3 @@
         </div>
     </div>
 @stop
-
