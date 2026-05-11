@@ -44,6 +44,10 @@ Route::middleware(['auth', 'prohibirRetroceso'])->group(function () {
     // Clínica (admin y dentista)
     Route::middleware('role:admin,dentista')->group(function () {
         Route::resource('historiales', HistorialesController::class)->except(['show']);
+       
+        Route::get('/historiales/visualizar/{historiale}',
+            [HistorialesController::class, 'visualizar']
+        )->name('historiales.visualizar');
     });
 });
 

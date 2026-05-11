@@ -51,6 +51,9 @@
                             <td>{{ \Illuminate\Support\Str::limit($h->diagnostico, 60) }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($h->tratamiento, 60) }}</td>
                             <td class="text-right">
+                                <a class="btn btn-info btn-sm" title="Ver" href="{{ route('historiales.visualizar', $h) }}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <a class="btn btn-sm btn-primary" href="{{ route('historiales.edit', $h) }}">Editar</a>
                                 <form class="d-inline" method="POST" action="{{ route('historiales.destroy', $h) }}"
                                     onsubmit="return confirm('¿Eliminar historial?');">

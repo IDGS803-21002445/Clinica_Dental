@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clinica;
 
 use App\Http\Controllers\Controller;
+use App\Models\Citas;
 use App\Models\Historiales;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
@@ -70,6 +71,22 @@ class HistorialesController extends Controller
     {
         $historiale->delete();
         return redirect()->route('historiales.index')->with('success', 'Historial eliminado.');
+    }
+    
+    public function visualizar(Historiales $historiale)
+    {
+        // Cargar relaciones necesarias
+        $historiale->load('paciente');
+
+        // Obtener citas del paciente
+        $citas = Citas::where('paciente_id', $historiale->paciente_id)
+            ->orderBy('fecha_hora', 'desc')
+            ->get();
+
+        return view('Clinica.Historiales.visualizar', [
+            'historial' => $historiale,
+            'citas' => $citas
+        ]);
     }
 }
 
