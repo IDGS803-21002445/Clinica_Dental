@@ -64,6 +64,7 @@
     <script src="js/Generales/Plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/Generales/Plugins/jquery-validation/additional-methods.js"></script>
     <script src="js/Generales/Plugins/sweetalert/sweetalert2.js" charset="UTF-8"></script>
+    <script src="js/Generales/prime-dental-alerts.js" charset="UTF-8"></script>
     <script src="js/Generales/Plugins/fontawesome-6.4.0/js/all.min.js" charset="UTF-8"></script>
     <script src="js/Generales/Validaciones/PeticionAjax.js"></script>
     <script src="js/Generales/Login.js"></script>

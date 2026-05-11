@@ -9,9 +9,9 @@ window.addEventListener("scroll", function () {
 });
 
 AOS.init({
-  duration: 900, 
+  duration: 900,
   easing: "ease-in-out",
-  once: true,    
+  once: true,
 });
 
 // عداد الأرقام المتزايدة
