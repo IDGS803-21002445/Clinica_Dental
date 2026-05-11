@@ -35,7 +35,7 @@ $(document).on("click", "#iniciarSesion", function () {
             //Cuando el formulario pase las validaciones
             let formdata = new FormData(form); //Creamos una variable donde guardamos los datos de formulario
             $.ajax({
-                url: "/IniciarSesion", //La ruta establecida es la de iniciar sesión
+                url: "/logearse", //La ruta establecida es la de iniciar sesión
                 type: "POST",
                 data: formdata, //Le enviamos el formData
                 contentType: false,
@@ -88,92 +88,6 @@ $(document).on("click", "#iniciarSesion", function () {
                     );
                 },
             });
-        },
-    });
-});
-
-//Cuando le demos click al boton de iniciar sesion
-$(document).on("click", "#recuperarContrasena", function () {
-    error2.innerHTML = ""; //Limpiamos el campo donde aparecen los erorres
-    $("#formularioRecuperarContrasena").validate().destroy(); //Destruimos la validacion del formulario, ya que si no hacemos esto la instancia de validacion se queda guardada en la cache y es como si se repitiera este metodo
-    $("#formularioRecuperarContrasena").validate({
-        //Iniciamos la validación del formulario
-        ignore: [],
-        errorClass:  "border-danger text-danger animate__animated animate__headShake animate__faster", //Estas clases se colocaran en caso de error
-        errorElement: "span", //A este elemento se le colocaran las clases de error
-        errorPlacement: function (error, e) {
-            jQuery(e).parents(".form-group").append(error);
-        },
-        //Reglas que tendrá cada campo en el formulario
-        rules: {
-            email2: {
-                required: true,
-                email: true,
-            },
-        },
-        submitHandler: function (form) {
-            //Cuando el formulario pase las validaciones
-            let emailValue = $("#email2").val();
-            $.ajax({
-                url: "/RecuperarContrasena", //La ruta establecida es la de iniciar sesión
-                type: "GET",
-                data: { email: emailValue }, //Le enviamos el formData
-                contentType: false,
-                headers: {
-                    //Tenemos que enviar el token de seguridad, este token tiene que estar en la cabecera de nuestro archivo blade.php
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-                beforeSend: () => {
-                    //Esta función se ejecuta entes de que se envie la petición
-                    $("#recuperarContrasena").html(
-                        //al botón le agregamos un icono de spinner y le colocamos el texto Actualizando
-                        "<i class='fa-regular fa-envelope'></i> ENVIANDO CORREO, POR FAVOR ESPERE UN MOMENTO..."
-                    );
-                },
-                success: function (response) {
-                    if (response.status == "success") {
-                        objeto.verAlerta(
-                            //Mandamos a llamar la funcion para mostrar la alerta
-                            response.titulo, //Le pasamos el titulo
-                            response.mensaje, //Le pasamos el mensaje
-                            response.status //Este campo es el tipo de alerta (success, error, info)
-                        );
-                        $("#email2").val("");
-                        error2.innerHTML = ""; //Limpiamos el campo donde aparecen los erorres
-                    } else if (response.status == "errorSIS") {
-                        //Esto significa que se recibio un error del sistema, ya sea porque se produjo en el codigo o lo devovio la BD
-                        // Autenticación fallida
-                        objeto.verAlerta(
-                            //Mandamos a llamar la funcion para mostrar la alerta
-                            response.titulo, //Le pasamos el titulo
-                            response.mensaje, //Le pasamos el mensaje
-                            "error" //Este campo es el tipo de alerta (success, error, info)
-                        );
-                    } else {
-                        //Este caso es cuando la BD devuelve que el usuario no existe
-                        error2.innerHTML = response.mensaje; //En el elemento error colocamos la respuesta
-                    }
-                    $("#recuperarContrasena").html(
-                        //al botón le agregamos un icono de spinner y le colocamos el texto Actualizando
-                        "<i class='fa-solid fa-envelope-open-text'></i> ENVIAR CORREO"
-                    );
-                },
-                error: function (data) {
-                    objeto.verAlerta(
-                        //Mandamos a llamar la funcion para mostrar la alerta
-                        "No se pudo realizar la consulta", //Le pasamos el titulo
-                        `Estatus: ${data.statusText} <br><br> El sistema arrojó el error: ${data.responseJSON.message}`, //Le pasamos el mensaje
-                        "error" //Este campo es el tipo de alerta (success, error, info)
-                    );
-                    $("#recuperarContrasena").html(
-                        //al botón le agregamos un icono de spinner y le colocamos el texto Actualizando
-                        "<i class='fa-solid fa-envelope-open-text'></i> ENVIAR CORREO"
-                    );
-                },
-            });
-            
         },
     });
 });

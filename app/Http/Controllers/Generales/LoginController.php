@@ -5,16 +5,45 @@ namespace App\Http\Controllers\Generales;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Generales\Login\LoginRequest;
 use App\Mail\Generales\RecuperarContrasena;
+use App\Models\User;
 use App\Models\Usuario;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+
+    public function index(){
+        return view('Generales.newlogin');
+    }
+
+    public function newlogin(Request $request){
+
+        $request->validate([
+                'email' => 'required',
+                'password' => 'required'
+            ]);
+
+        $user = Usuario::where('email', $request->input('email'))->first();
+
+        if(!$user || !Hash::check($request->password, $user->password)){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Credenciales Incorrectas',
+            ], 401);
+        }
+
+        $token = $user->createToken('api')->plainTextToken;
+
+        return redirect(route('index'));
+    }
+
     public function retornarVista(){
         if (Auth::check()) {
             // Redireccionar al dashboard
