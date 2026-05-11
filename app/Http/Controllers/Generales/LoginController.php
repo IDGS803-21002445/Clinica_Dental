@@ -41,7 +41,13 @@ class LoginController extends Controller
 
         $token = $user->createToken('api')->plainTextToken;
 
-        return redirect(route('index'));
+        Auth::login($user);
+
+        return response()->json([
+            'status' => 'success',
+            'token' => $token,
+            'redirect' => route('index')
+        ]);
     }
 
     public function retornarVista(){

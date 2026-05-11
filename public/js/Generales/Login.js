@@ -58,6 +58,7 @@ $(document).on("click", "#iniciarSesion", function () {
                         "<i class='fa-solid fa-right-to-bracket'></i> Iniciar Sesión"
                     );
                     if (response.status == "success") {
+                        localStorage.setItem('token', response.token);
                         // Redirigir al usuario utilizando la URL devuelta en la respuesta JSON
                         window.location.href = response.redirect;
                     } else if (response.status == "errorSIS") {
