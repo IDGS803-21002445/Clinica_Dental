@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Recepcion\CitasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/citas/calendario', [CitasController::class, 'getCitas']);
+    Route::get('/citas/pacientes', [CitasController::class, 'getPacientes']);
+    Route::get('/citas/dentistas', [CitasController::class, 'getDentistas']);
 });

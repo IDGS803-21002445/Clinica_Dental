@@ -182,6 +182,7 @@
     <script src="js/Generales/Plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/Generales/Plugins/jquery-validation/additional-methods.js"></script>
     <script src="js/Generales/Plugins/sweetalert/sweetalert2.js" charset="UTF-8"></script>
+    <script src="js/Generales/prime-dental-alerts.js" charset="UTF-8"></script>
     <script src="js/Generales/Validaciones/PeticionAjax.js"></script>
     <script src="js/Administrador/Alumnos.js"></script>
 

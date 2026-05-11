@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Generales;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Generales\Login\LoginRequest;
 use App\Mail\Generales\RecuperarContrasena;
+use App\Models\User;
 use App\Models\Usuario;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,9 +14,43 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LoginController extends Controller
 {
+
+    public function index(){
+        return view('Generales.newlogin');
+    }
+
+    public function newlogin(Request $request){
+
+        $request->validate([
+                'email' => 'required',
+                'password' => 'required'
+            ]);
+
+        $user = Usuario::where('email', $request->input('email'))->first();
+
+        if(!$user || !Hash::check($request->password, $user->password)){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Credenciales Incorrectas',
+            ], 401);
+        }
+
+        $token = $user->createToken('api')->plainTextToken;
+
+        Auth::login($user);
+
+        return response()->json([
+            'status' => 'success',
+            'token' => $token,
+            'redirect' => route('index')
+        ]);
+    }
+
     public function retornarVista(){
         if (Auth::check()) {
             // Redireccionar al dashboard
@@ -157,6 +192,9 @@ class LoginController extends Controller
     //Función para cerrar la sesion del usuario
     public function logout(Request $request)
     {
+        $id = Auth::id();
+        PersonalAccessToken::where('tokenable_id', $id)
+        ->delete();
         Auth::logout(); //Esta linea de codigo destruye la sesion del usuario 
         $request->session()->invalidate();  //Destruye la sesión
         $request->session()->regenerate();  //Y la elimina

@@ -24,16 +24,6 @@
                   style="width: 180px;" alt="logo">
               </div>
             <h2 class="mt-1 mb-3 pb-1">Clinica Dental</h2>
-            <form class="recover-form" id="formularioRecuperarContrasena">
-                @csrf
-                <div class="form-group d-block text-left">
-                    <label for="">Email:</label>
-                    <input type="text" placeholder="Email" id="email2" name="email2" class="mb-0" />
-                </div>
-                <button id="recuperarContrasena" name="recuperarContrasena" type="submit" class="mb-3"><i class="fa-solid fa-envelope-open-text"></i> Enviar correo</button>
-                <span id="error2" class="text-center text-danger"></span>
-                <p class="message">¿Quieres iniciar sesión? <a href="javascript:void(0)">Iniciar Sesión</a></p>
-            </form>
             <form class="login-form" id="formularioLogin" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group d-block text-left">
@@ -46,7 +36,6 @@
                 </div>
                 <button id="iniciarSesion" name="iniciarSesion" type="submit" class="mb-3"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</button>
                 <p><span id="error" class="text-center text-danger"></span></p>
-                <p class="message">¿Olvidaste tu contraseña? <a href="javascript:void(0)">Recuperar</a></p>
             </form>
 
             <p class="pt-4 version">S P R M<br>Versión 1.0.0</p>
@@ -64,7 +53,6 @@
     <script src="js/Generales/Plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/Generales/Plugins/jquery-validation/additional-methods.js"></script>
     <script src="js/Generales/Plugins/sweetalert/sweetalert2.js" charset="UTF-8"></script>
-    <script src="js/Generales/prime-dental-alerts.js" charset="UTF-8"></script>
     <script src="js/Generales/Plugins/fontawesome-6.4.0/js/all.min.js" charset="UTF-8"></script>
     <script src="js/Generales/Validaciones/PeticionAjax.js"></script>
     <script src="js/Generales/Login.js"></script>
