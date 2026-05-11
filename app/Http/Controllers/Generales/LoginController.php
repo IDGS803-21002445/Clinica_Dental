@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LoginController extends Controller
 {
@@ -191,6 +192,9 @@ class LoginController extends Controller
     //Función para cerrar la sesion del usuario
     public function logout(Request $request)
     {
+        $id = Auth::id();
+        PersonalAccessToken::where('tokenable_id', $id)
+        ->delete();
         Auth::logout(); //Esta linea de codigo destruye la sesion del usuario 
         $request->session()->invalidate();  //Destruye la sesión
         $request->session()->regenerate();  //Y la elimina
