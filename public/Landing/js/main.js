@@ -1,10 +1,20 @@
 window.addEventListener("scroll", function () {
   const nav = document.querySelector(".main-nav");
+  if (!nav) return;
 
   if (window.scrollY > 50) {
     nav.classList.add("scrolled");
   } else {
     nav.classList.remove("scrolled");
+  }
+});
+
+// Estado inicial por si la página carga ya desplazada
+document.addEventListener("DOMContentLoaded", function () {
+  const nav = document.querySelector(".main-nav");
+  if (!nav) return;
+  if (window.scrollY > 50) {
+    nav.classList.add("scrolled");
   }
 });
 
@@ -14,7 +24,7 @@ AOS.init({
   once: true,
 });
 
-// عداد الأرقام المتزايدة
+// Contador animado para estadísticas
 const counters = document.querySelectorAll(".counter");
 
 counters.forEach((counter) => {
@@ -34,7 +44,7 @@ counters.forEach((counter) => {
     }
   };
 
-  // تشغيل العد عند دخول العنصر للشاشة
+  // Iniciar animación al entrar en el viewport
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

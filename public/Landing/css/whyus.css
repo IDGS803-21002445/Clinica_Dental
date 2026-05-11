@@ -8,7 +8,7 @@ body {
   font-family: "Poppins", Arial;
 }
 .btn {
-  background: linear-gradient(135deg, #6b63ff, #4b3df2);
+  background: linear-gradient(135deg, #4b3df2, #6b63ff);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -17,45 +17,7 @@ body {
   transition: 0.3s;
 }
 
-/*header*/
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-.main-nav {
-  transition: 0.3s ease;
-  background: transparent;
-}
-
-.main-nav.scrolled {
-  background: #ffffff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.navbar-toggler {
-  border: none;
-  color: var(--blueMid) !important;
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;
-}
-.nav-link {
-  color: var(--blueMid) !important;
-  font-weight: 500;
-}
-.brand-logo i {
-  color: var(--blueMid) !important;
-}
-.brand-logo h4 {
-  color: var(--blueMid) !important;
-}
+/* Navbar: usar solo style.css (evita sobrescribir .main-nav.scrolled) */
 /*hero section*/
 .hero-section {
   min-height: 70vh;
@@ -78,14 +40,14 @@ body {
 }
 /* Title */
 .hero-title {
-  color: #fff;
+  color: #1a1548;
   font-weight: 800;
   font-size: 42px;
 }
 
 /* Paragraph */
 .hero-text {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(26, 21, 72, 0.88);
   font-size: 16px;
   max-width: 650px;
   margin: 10px auto 25px;
@@ -136,7 +98,7 @@ body {
 .appointment-box {
   position: relative;
   border-radius: 22px 0 0 22px;
-  background: linear-gradient(135deg, #6b63ff, #4b3df2);
+  background: linear-gradient(135deg, #4b3df2, #6b63ff);
   overflow: hidden;
 }
 
@@ -207,14 +169,6 @@ body {
 .footer-contact i {
   color: #4e4bff;
   margin-right: 6px;
-}
-
-.newsletter-box input {
-  border-radius: 8px;
-}
-
-.newsletter-box button {
-  border-radius: 8px;
 }
 
 .social-icons i {

@@ -1,6 +1,10 @@
 @extends('landing_page._base')
 
-@section('title', 'Por Qué Elegirnos - Prime Dental')
+@section('title', 'Por qué nosotros - Prime Dental')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('landing/css/whyus.css') }}">
+@endpush
 
 @section('content')
 <!-- sección hero -->
@@ -13,9 +17,10 @@
             Brindamos atención dental confiable, compasiva y de alta calidad
             para garantizar tu comodidad y confianza.
         </p>
-        <a href="#" class="btn hero-btn px-5 py-2">
-            Reserva una Cita
-        </a>
+        @include('landing_page._cta_whatsapp', [
+            'class' => 'btn hero-btn px-5 py-2',
+            'label' => 'Reservar cita',
+        ])
     </div>
 </section>
 
@@ -24,7 +29,7 @@
     <div class="row align-items-center g-4">
         <!-- Columna de la Imagen -->
         <div class="col-md-5">
-            <img src="img/whyus.jpg" class="why-img" alt="Por qué elegir Prime Dental">
+            <img src="{{ asset('landing/img/whyus.jpg') }}" class="why-img" alt="Por qué elegir Prime Dental">
         </div>
 
         <!-- Columna del Texto -->
@@ -72,15 +77,16 @@
                 <p class="text-white-50">
                     Reserva tu visita y deja que nuestro equipo cuide de tu salud dental.
                 </p>
-                <a class="btn btn-light px-4 fw-semibold">
-                    Reserva una Cita
-                </a>
+                @include('landing_page._cta_whatsapp', [
+                    'class' => 'btn btn-light px-4 fw-semibold',
+                    'label' => 'Reservar cita',
+                ])
             </div>
         </div>
 
         <!-- Columna de la Imagen -->
         <div class="col-md-5">
-            <img src="img/whyusapp.jpeg" class="equal-img" alt="Cita en Prime Dental">
+            <img src="{{ asset('landing/img/whyusapp.jpeg') }}" class="equal-img" alt="Cita en Prime Dental">
         </div>
     </div>
 </section>

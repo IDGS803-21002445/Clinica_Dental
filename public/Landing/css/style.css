@@ -43,6 +43,10 @@ body {
 
 .navbar-toggler {
   border: none;
+  color: #4b3df2 !important;
+}
+
+.main-nav.scrolled .navbar-toggler {
   color: var(--light) !important;
 }
 
@@ -50,13 +54,19 @@ body {
   box-shadow: none;
 }
 .nav-link {
-  color: var(--light) !important;
+  color: #4b3df2 !important;
   font-weight: 500;
 }
 .brand-logo i {
-  color: var(--light) !important;
+  color: #4b3df2 !important;
 }
 .brand-logo h4 {
+  color: #4b3df2 !important;
+}
+
+.main-nav.scrolled .nav-link,
+.main-nav.scrolled .brand-logo i,
+.main-nav.scrolled .brand-logo h4 {
   color: var(--light) !important;
 }
 
@@ -64,14 +74,13 @@ body {
   padding: 120px 0 90px;
   background: linear-gradient(
     180deg,
-    #4b3df2 0%,
-    #8a7aff 20%,
+    #ffffff 0%,
+    #eef0ff 20%,
     #bfc4ff 45%,
-    #eef0ff 70%,
-    #ffffff 100%
+    #8a7aff 70%,
+    #4b3df2 100%
   );
   border-radius: 0 0 35px 35px;
-  color: #fff;
 }
 
 /* TEXT */
@@ -85,7 +94,28 @@ body {
   margin-top: 10px;
   max-width: 420px;
   opacity: 0.9;
-  color: rgb(255, 255, 255);
+}
+
+.hero-modern .hero-title {
+  color: #1a1548;
+}
+
+.hero-modern .hero-desc {
+  color: rgba(26, 21, 72, 0.88);
+}
+
+.hero-modern .hero-btn {
+  background: #fff;
+  color: #4b3df2;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+}
+
+.hero-modern .hero-btn:hover {
+  background: rgba(255, 255, 255, 0.92);
+  color: #4b3df2;
+  transform: translateY(-2px);
 }
 
 /* BUTTONS */
@@ -118,6 +148,7 @@ body {
   padding: 10px 18px;
   width: max-content;
   margin-top: 12px;
+  color: #fff;
 }
 
 .rating-value {
@@ -179,7 +210,7 @@ body {
 }
 /* Stats Section */
 .stats-box {
-  background: linear-gradient(135deg, #6b63ff, #a69eff);
+  background: linear-gradient(135deg, #4b3df2, #a69eff);
   padding: 28px 35px;
   border-radius: 18px;
   color: #fff;
@@ -317,7 +348,7 @@ body {
 }
 
 .cta-box {
-  background: linear-gradient(135deg, #6b63ff, #a69eff);
+  background: linear-gradient(135deg, #4b3df2, #a69eff);
   padding: 28px 35px;
   border-radius: 18px;
   color: #fff;
@@ -387,16 +418,6 @@ body {
 .footer-contact i {
   color: #4e4bff;
   margin-right: 6px;
-}
-
-.newsletter-box input {
-  border-radius: 8px;
-}
-
-.newsletter-box button {
-  border-radius: 8px;
-  background: linear-gradient(135deg, #6b63ff, #4b3df2);
-  color: var(--light);
 }
 
 .social-icons i {

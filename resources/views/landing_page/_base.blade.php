@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Prime Dental - Atención dental profesional y moderna. Tratamientos de alta calidad con tecnología avanzada y un equipo médico comprometido con tu salud dental.">
-    <meta name="keywords" content="dentista, salud dental, implantes dentales, ortodoncia, limpieza dental, Gaza">
-    <meta name="author" content="Farah Abuassi">
+    <meta name="keywords" content="dentista, clínica dental, implantes, ortodoncia, limpieza dental, estética dental, Prime Dental">
+    <meta name="author" content="Prime Dental">
     
     <!-- Bootstrap -->
     <link href="{{ asset('landing/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -27,11 +27,12 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
+    @stack('styles')
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('landing/img/download (35).png') }}" type="image/x-icon">
     
-    <title>Prime Dental | Atención Dental Profesional</title>
+    <title>@yield('title', 'Prime Dental | Atención dental profesional')</title>
 </head>
 <body>
 
@@ -87,10 +88,11 @@
                     </li>
                 </ul>
                 
-                <!-- Botón CTA Desktop -->
-                <a href="#" class="btn btn-primary px-4 d-none d-lg-block">
-                    Reservar Cita
-                </a>
+                <!-- Botón CTA Desktop → WhatsApp -->
+                @include('landing_page._cta_whatsapp', [
+                    'class' => 'btn btn-primary px-4 d-none d-lg-block',
+                    'label' => 'Reservar cita',
+                ])
                 
                 <!-- Botón Menú Móvil -->
                 <button class="navbar-toggler d-lg-none border-0" 
@@ -123,7 +125,10 @@
                     <li><a class="nav-link {{ request()->routeIs('pricing') ? 'active' : '' }}" href="{{ route('pricing') }}">Precios</a></li>
                     <li><a class="nav-link {{ request()->routeIs('solutions') ? 'active' : '' }}" href="{{ route('solutions') }}">Soluciones</a></li>
                 </ul>
-                <a href="#" class="btn btn-primary w-100 mt-4">Reservar Cita</a>
+                @include('landing_page._cta_whatsapp', [
+                    'class' => 'btn btn-primary w-100 mt-4',
+                    'label' => 'Reservar cita',
+                ])
             </div>
         </div>
     </header>
@@ -139,26 +144,8 @@
             
             <div class="row g-4">
                 
-                <!-- Newsletter -->
-                <div class="col-lg-4">
-                    <h6 class="fw-bold mb-3">Suscríbete a nuestro Newsletter</h6>
-                    <p class="text-muted small">
-                        Recibe las últimas novedades y consejos de salud dental directamente en tu correo.
-                    </p>
-                    
-                    <form class="newsletter-box d-flex gap-2" action="#" method="POST">
-                        @csrf
-                        <div class="flex-grow-1">
-                            <input type="email" name="email" class="form-control" 
-                                   placeholder="tu@email.com" required
-                                   aria-label="Correo electrónico">
-                        </div>
-                        <button type="submit" class="btn btn-primary px-4">Suscribir</button>
-                    </form>
-                </div>
-                
                 <!-- Menú Principal -->
-                <div class="col-lg-2">
+                <div class="col-md-4 col-lg-4">
                     <h6 class="fw-bold mb-3">Menú</h6>
                     <ul class="footer-links list-unstyled">
                         <li><a href="{{ route('home') }}" class="text-decoration-none">Inicio</a></li>
@@ -171,7 +158,7 @@
                 </div>
                 
                 <!-- Páginas Utilitarias -->
-                <div class="col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <h6 class="fw-bold mb-3">Enlaces Útiles</h6>
                     <ul class="footer-links list-unstyled">
                         <li><a href="#">Guía de Estilo</a></li>
@@ -184,21 +171,16 @@
                 </div>
                 
                 <!-- Contacto -->
-                <div class="col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <h6 class="fw-bold mb-3">Contacto</h6>
                     <ul class="footer-contact list-unstyled">
                         <li class="mb-2">
                             <i class="bi bi-envelope me-2"></i>
-                            <a href="mailto:contact@dentist.com" class="text-decoration-none">contact@dentist.com</a>
+                            <a href="mailto:{{ config('landing.contact_email') }}" class="text-decoration-none">{{ config('landing.contact_email') }}</a>
                         </li>
                         <li class="mb-2">
-                            <i class="bi bi-telephone me-2"></i>
-                            <a href="tel:+970598536488" class="text-decoration-none">+970 598 536 488</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-geo-alt me-2"></i>
-                            Al-Remal — Khaled Bin Al-Waleed<br>
-                            Gaza, Palestina
+                            <i class="bi bi-whatsapp me-2"></i>
+                            <a href="{{ config('landing.whatsapp_reservation_url') }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">{{ config('landing.phone_display') }} (WhatsApp)</a>
                         </li>
                     </ul>
                 </div>
@@ -216,16 +198,11 @@
                 </div>
                 
                 <div class="text-center text-md-start">
-                    <small class="text-muted d-block">
-                        Copyright &copy; Prime Dental — Diseñado por BRIX Templates — Desarrollado con Webflow
-                    </small>
-                    <small class="text-muted">
-                        Desarrollado por <a href="https://github.com/farahabuassi17" target="_blank" rel="noopener noreferrer">Farah Abuassi</a> • 
-                        Distribuido por <a href="https://themewagon.com" target="_blank" rel="noopener noreferrer">ThemeWagon</a>
-                    </small>
+                    <small class="text-muted">&copy; {{ date('Y') }} Prime Dental. Todos los derechos reservados.</small>
                 </div>
                 
                 <div class="social-icons d-flex gap-3">
+                    <a href="{{ config('landing.whatsapp_reservation_url') }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp citas" class="text-decoration-none"><i class="bi bi-whatsapp"></i></a>
                     <a href="#" aria-label="Facebook" class="text-decoration-none"><i class="bi bi-facebook"></i></a>
                     <a href="#" aria-label="Twitter" class="text-decoration-none"><i class="bi bi-twitter"></i></a>
                     <a href="#" aria-label="Instagram" class="text-decoration-none"><i class="bi bi-instagram"></i></a>
@@ -251,6 +228,6 @@
             offset: 100
         });
     </script>
-    
+    @stack('scripts')
 </body>
 </html>
