@@ -116,11 +116,10 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        // OJO: estás usando email en el form pero tu BD tiene username
         $user = Usuario::where('email', $request->email)->first();
 
         if (!$user) {
@@ -130,16 +129,20 @@ class LoginController extends Controller
             ]);
         }
 
-        // ⚠️ IMPORTANTE: si tu password NO está encriptado
-        if ($user->password !== $request->password) {
+        // Compatibilidad: si existían contraseñas en texto plano, las migra a hash al primer login.
+        $passwordOk = Hash::check($request->password, $user->password) || $user->password === $request->password;
+
+        if (!$passwordOk) {
             return response()->json([
                 'status' => 'error',
                 'mensaje' => 'Contraseña incorrecta'
             ]);
         }
 
-        // Si quieres hacerlo BIEN (recomendado):
-        // if (!Hash::check($request->password, $user->password)) { ... }
+        if (!Hash::check($request->password, $user->password)) {
+            $user->password = $request->password; // cast 'hashed' lo encripta al guardar
+            $user->save();
+        }
 
         Auth::login($user);
 

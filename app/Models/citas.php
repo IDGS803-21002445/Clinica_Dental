@@ -17,8 +17,6 @@ class Citas extends Model
         'estatus'    => 'string',
     ];
 
-    public $timestamps = false;
-
     public function paciente()
     {
         return $this->belongsTo(Pacientes::class, 'paciente_id');
