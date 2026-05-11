@@ -256,8 +256,8 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'use_route_url' => true,
+    'dashboard_url' => 'index',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -298,26 +298,28 @@ return [
     |
     */
 
-'menu' => [
+    'menu' => [
 
-    ['text' => 'Dashboard', 'route' => 'index', 'icon' => 'fas fa-home'],
+        ['text' => 'Dashboard', 'route' => 'index', 'icon' => 'fas fa-home'],
 
-    ['header' => 'CLÍNICA'],
+        // Recepción (admin/recepcionista)
+        ['header' => 'RECEPCIÓN', 'can' => 'mod-recepcion'],
+        ['text' => 'Pacientes', 'route' => 'pacientes.index', 'icon' => 'fas fa-user-injured', 'can' => 'mod-recepcion'],
+        ['text' => 'Citas', 'route' => 'citas.index', 'icon' => 'fas fa-calendar-check', 'can' => 'mod-recepcion'],
 
-    // ['text' => 'Pacientes', 'route' => 'pacientes.index', 'icon' => 'fas fa-user-injured'],
-    // ['text' => 'Citas', 'route' => 'citas.index', 'icon' => 'fas fa-calendar-check'],
-    // ['text' => 'Historiales', 'route' => 'historiales.index', 'icon' => 'fas fa-file-medical'],
+        // Clínica (admin/dentista)
+        ['header' => 'CLÍNICA', 'can' => 'mod-clinica'],
+        ['text' => 'Historiales clínicos', 'route' => 'historiales.index', 'icon' => 'fas fa-file-medical', 'can' => 'mod-clinica'],
 
-    ['header' => 'PERSONAL'],
+        // Personal (admin)
+        ['header' => 'PERSONAL', 'can' => 'mod-personal'],
+        ['text' => 'Dentistas', 'route' => 'dentistas.index', 'icon' => 'fas fa-user-md', 'can' => 'mod-personal'],
+        ['text' => 'Recepcionistas', 'route' => 'recepcionistas.index', 'icon' => 'fas fa-user-tie', 'can' => 'mod-personal'],
 
-    // ['text' => 'Dentistas', 'route' => 'dentistas.index', 'icon' => 'fas fa-user-md'],
-    // ['text' => 'Recepcionistas', 'route' => 'recepcionistas.index', 'icon' => 'fas fa-user-tie'],
-
-    ['header' => 'ADMINISTRACIÓN'],
-
-     ['text' => 'Usuarios', 'route' => 'usuarios.index', 'icon' => 'fas fa-users-cog'],
-
-],
+        // Administración (admin)
+        ['header' => 'ADMINISTRACIÓN', 'can' => 'mod-usuarios'],
+        ['text' => 'Usuarios', 'route' => 'usuarios.index', 'icon' => 'fas fa-users-cog', 'can' => 'mod-usuarios'],
+    ],
 
     /*
     |--------------------------------------------------------------------------

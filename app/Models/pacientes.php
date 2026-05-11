@@ -16,8 +16,6 @@ class Pacientes extends Model
         'fecha_nacimiento' => 'date',
     ];
 
-    public $timestamps = false;
-
     public function citas()
     {
         return $this->hasMany(Citas::class, 'paciente_id');
