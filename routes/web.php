@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::GET('/loginm', [LoginController::class, 'index'])->name('login');
+Route::POST('/logearse', [LoginController::class, 'newlogin'])->name('logearse');
+
+
 Route::GET('/login', [LoginController::class, 'retornarVista'])->name('login');          //Ruta a la pagina de login
 Route::any('/logout', [LoginController::class, 'logout'])->name('logout');  //Ruta cuando cerramos la sesión
 Route::POST('/IniciarSesion', [LoginController::class, 'login'])->name('IniciarSesion');  //Ruta cuando se insertan las credenciales 

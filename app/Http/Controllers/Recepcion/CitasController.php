@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Citas;
 use App\Models\Dentistas;
 use App\Models\Pacientes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CitasController extends Controller
@@ -18,6 +19,65 @@ class CitasController extends Controller
 
         return view('Recepcion.Citas.index', compact('citas'));
     }
+    
+    public function getCitas()
+    {
+        $citas = Citas::with(['paciente', 'dentista'])
+            ->orderBy('fecha_hora', 'desc')
+            ->get()
+            ->map(function ($cita) {
+                $color = "";
+                switch ($cita->estatus) {
+                    case 'pendiente':
+                        $color = "gray";
+                        break;
+                    case 'confirmada':
+                        $color = "blue";
+                        break;
+                    case 'cancelada':
+                        $color = "red";
+                        break;
+                    default:
+                        $color = "green";
+                        break;
+                }
+                return [
+                    'id' => $cita->id,
+                    'title' => $cita->motivo,
+                    'start' => Carbon::parse($cita->fecha_hora)
+                    ->addHours(6)
+                    ->toIso8601String(),
+                    'color' => $color,
+                    'extendedProps' => [
+                        'dentista' => $cita->dentista_id,
+                        'paciente' => $cita->paciente_id,
+                        'estatus' => $cita->estatus,
+                    ]
+                ];
+            })
+            ->toArray();
+        
+        return $citas;
+    }
+    
+    public function getPacientes()
+    {
+        $pacientes = Pacientes::orderBy('nombre', 'asc')
+            ->get()
+            ->toArray();
+
+        return $pacientes;
+    }
+    
+    public function getDentistas()
+    {
+        $dentistas = Dentistas::orderBy('nombres', 'asc')
+            ->get()
+            ->toArray();
+
+        return $dentistas;
+    }
+    
 
     public function create()
     {
