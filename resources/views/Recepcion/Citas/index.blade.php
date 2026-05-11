@@ -2,6 +2,37 @@
 
 @section('title', 'Citas')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.css" onerror="this.remove()">
+<style>
+    /* FullCalendar v6: el CSS principal suele ir por paquetes; si el link falla, estos estilos evitan desbordes raros */
+    .agenda-citas-page {
+        max-width: 100%;
+        min-width: 0;
+    }
+    .agenda-citas-page .agenda-citas-card {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .agenda-citas-page .agenda-citas-body {
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+    .agenda-citas-page #calendar {
+        min-height: 520px;
+    }
+    .agenda-citas-page .fc {
+        max-width: 100%;
+    }
+    .agenda-citas-page .fc .fc-scrollgrid {
+        border-radius: 0.25rem;
+    }
+</style>
+@endsection
+
 @section('content_header')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -52,6 +83,7 @@
         dateClick: async function (info) {
             frm.reset();
             frm.action = "{{ route('citas.store') }}";
+            document.getElementById('method_field').innerHTML = '';
             eliminar.classList.add('d-none');
             document.getElementById('start').value = info.dateStr.substring(0,16);
             document.getElementById('id').value = '';
@@ -164,28 +196,28 @@
                                 <div class="form-floating mb-3">
                                     <label for="motivo">Motivo de la cita</label>
                                     <input type="hidden" id="id" name="id">
-                                    <input id="title" type="text" class="form-control" name="motivo">
+                                    <input id="title" type="text" class="form-control" name="motivo" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <label for="paciente_id">Paciente</label>
-                                    <select name="paciente_id" id="paciente" class="form-control">
+                                    <select name="paciente_id" id="paciente" class="form-control" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <label for="dentista_id">Dentista</label>
-                                    <select name="dentista_id" id="dentista" class="form-control">
+                                    <select name="dentista_id" id="dentista" class="form-control" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <label for="estatus">Estatus</label>
-                                    <select name="estatus" id="estatus" class="form-control">
-                                        <option value=0>Seleccione uno</option>
+                                    <select name="estatus" id="estatus" class="form-control" required>
+                                        <option value="">Seleccione uno</option>
                                         <option value="pendiente">Pendiente</option>
                                         <option value="confirmada">Confirmada</option>
                                         <option value="completada">Completada</option>
@@ -204,7 +236,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <label for="" class="form-label">Fecha</label>
-                                    <input class="form-control" id="start" type="datetime-local" name="fecha_hora">
+                                    <input class="form-control" id="start" type="datetime-local" name="fecha_hora" readonly required>
                                 </div>
                             </div>
                         </div>
