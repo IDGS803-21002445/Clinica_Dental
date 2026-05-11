@@ -29,11 +29,29 @@
                         </div>
 
                         <!-- Rating Box -->
-                        <div class="hero-rating mt-4">
-                            <span class="rating-value">4.9★</span>
-                            <span class="rating-text">Patient Satisfaction
-                                Rating</span>
+                        <div class="hero-rating">
+
+                        <div class="rating-icon">
+                            <i class="bi bi-star-fill"></i>
                         </div>
+
+                        <div class="rating-content">
+
+                            <div class="rating-top">
+                                <span class="rating-value">4.9</span>
+
+                                <span class="rating-text">
+                                    Patient Satisfaction Rating
+                                </span>
+                            </div>
+
+                            <div class="rating-subtext">
+                                Based on 200+ reviews from our patients
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     </div>
 
